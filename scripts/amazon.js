@@ -24,10 +24,10 @@ const products = [{
   priceCents: 799
 }];
 
-let producrsHTML = '';
+let productsHTML = '';
 
 products.forEach((product) => {
-  producrsHTML += `
+  productsHTML += `
         <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -47,7 +47,7 @@ products.forEach((product) => {
           </div>
 
           <div class="product-price">
-            $${product.priceCents / 100}
+            $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -81,4 +81,4 @@ products.forEach((product) => {
   //console.log(html);
 });
 
-document.querySelector('.products-grid').innerHTML = producrsHTML;
+document.querySelector('.products-grid').innerHTML = productsHTML;
