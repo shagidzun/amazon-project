@@ -66,6 +66,7 @@ document.querySelectorAll('.js-add-to-cart')
     button.addEventListener('click', () => {
       const productId = button.dataset.productId;
       const foundItem = cart.find((item) => item.productId === productId);
+      let cartQuantity = 0;
 
       if (!foundItem) {
         cart.push({
@@ -75,6 +76,12 @@ document.querySelectorAll('.js-add-to-cart')
       } else {
         foundItem.quantity++
       }
-      console.log(cart);
+
+      cartQuantity = cart.reduce((sum, item) => sum += item.quantity, 0);
+
+      document.querySelector('.cart-quantity')
+        .innerHTML = cartQuantity;
+      console.log(cart.reduce((sum, item) => sum += item.quantity, 0));
+      //console.log(cart);
     });
   });
