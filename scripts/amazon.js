@@ -43,7 +43,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart added-to-cart-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -67,8 +67,14 @@ document.querySelectorAll('.js-add-to-cart')
       const productId = button.dataset.productId;
       const foundItem = cart.find((item) => item.productId === productId);
       const itemQuantity = Number(document.querySelector(`.quantity-selector-${productId}`).value);
+      const checkmark = document.querySelector(`.added-to-cart-${productId}`);
       let cartQuantity = 0;
 
+      clearTimeout(checkmark.timeoutId);
+      checkmark.classList.add('is-visible');
+      checkmark.timeoutId = setTimeout(() => {
+        checkmark.classList.remove('is-visible');
+      }, 2000);
 
       if (!foundItem) {
         cart.push({
@@ -83,8 +89,10 @@ document.querySelectorAll('.js-add-to-cart')
 
       document.querySelector('.cart-quantity')
         .innerHTML = cartQuantity;
+
       
-      console.log(typeof (itemQuantity));
+      
+      console.log(typeof (timeoutId));
       //console.log(cart.reduce((sum, item) => sum += item.quantity, 0));
       //console.log(cart);
     });
