@@ -1,7 +1,6 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, updCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-//import { updCartQuantity } from "./amazon.js";
 
 
 function renderCartList() {
@@ -91,11 +90,13 @@ function renderCartList() {
   document.querySelector('.order-summary')
     .innerHTML = cartHTML;
 
+  updCartQuantity();
+
   document.querySelectorAll('.delete-quantity-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       removeFromCart(link.dataset.productId);
-      
+      updCartQuantity();
       document.querySelector(`.cart-item-container-${link.dataset.productId}`)
         .remove();
     })
