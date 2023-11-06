@@ -10,7 +10,7 @@ function renderCartList() {
     const productId = cartItem.productId;
     const foundItem = products.find((item) => item.id === productId);
     cartHTML += `
-      <div class="cart-item-container">
+      <div class="cart-item-container-${foundItem.id}">
         <div class="delivery-date">
           Delivery date: Tuesday, June 21
         </div>
@@ -95,8 +95,9 @@ function renderCartList() {
   .forEach((link) => {
     link.addEventListener('click', () => {
       removeFromCart(link.dataset.productId);
-      renderCartList();
-      console.log(cart);
+      
+      document.querySelector(`.cart-item-container-${link.dataset.productId}`)
+        .remove();
     })
   });
 };
