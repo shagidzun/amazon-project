@@ -16,7 +16,8 @@ function addToCart(productId, itemQuantity) {
   if (!foundItem) {
     cart.push({
     productId: productId,
-    quantity: itemQuantity
+    quantity: itemQuantity,
+    deliveryOptionId: '1'
     });
   } else {
     foundItem.quantity += itemQuantity;

@@ -1,6 +1,6 @@
 import { cart, addToCart, updCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
-import { formatCurrency } from "./utils/money.js";
+import formatCurrency from "./utils/money.js";
 
 let productsHTML = '';
 
@@ -51,7 +51,7 @@ products.forEach((product) => {
           </div>
 
           <button class="add-to-cart-button button-primary js-add-to-cart"
-          data-product-name="${product.name}" 
+          data-product-name="${product.name}"
           data-product-id="${product.id}">
             Add to Cart
           </button>
@@ -68,10 +68,9 @@ updCartQuantity();
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click', () => {
-      const productId = button.dataset.productId;  
+      const productId = button.dataset.productId;
       const itemQuantity = Number(document.querySelector(`.quantity-selector-${productId}`).value);
       const checkmark = document.querySelector(`.added-to-cart-${productId}`);
-      
 
       clearTimeout(checkmark.timeoutId);
       checkmark.classList.add('is-visible');
