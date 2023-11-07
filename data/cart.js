@@ -30,4 +30,4 @@ function removeFromCart(productId) {
   saveToStorage();
 }
 
-export { cart, addToCart, removeFromCart, updCartQuantity };
+export { cart, addToCart, removeFromCart, updCartQuantity, saveToStorage };
