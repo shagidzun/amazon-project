@@ -29,6 +29,12 @@ function addToCart(productId, itemQuantity) {
 function removeFromCart(productId) {
   cart = cart.filter((cartItem) => cartItem.productId !== productId);
   saveToStorage();
+};
+
+function updDeliveryOption(productId, deliveryOption) {
+  const foundItem = cart.find((cartItem) => cartItem.productId === productId);
+  foundItem.deliveryOptionId = deliveryOption;
+  saveToStorage();
 }
 
-export { cart, addToCart, removeFromCart, updCartQuantity, saveToStorage };
+export { cart, addToCart, removeFromCart, updCartQuantity, saveToStorage, updDeliveryOption };
