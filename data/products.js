@@ -1,4 +1,11 @@
-export const products = [
+function getProduct(cartItem) {
+  const productId = cartItem.productId;
+  const foundItem = products.find((item) => item.id === productId);
+
+  return foundItem;
+};
+
+const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -658,3 +665,5 @@ export const products = [
     ]
   }
 ];
+
+export { products, getProduct };

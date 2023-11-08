@@ -1,4 +1,12 @@
+//import { getProduct } from "./products.js";
+
 let cart = JSON.parse(localStorage.getItem('cart'));
+
+function getCartItem(productId) {
+  const foundItem = cart.find((cartItem) => cartItem.productId === productId);
+
+  return foundItem;
+}
 
 function updCartQuantity() {
   let cartQuantity = 0;
@@ -12,7 +20,7 @@ function saveToStorage() {
 }
 
 function addToCart(productId, itemQuantity) {
-  const foundItem = cart.find((cartItem) => cartItem.productId === productId);
+  const foundItem = getCartItem(productId);
   if (!foundItem) {
     cart.push({
     productId: productId,
@@ -32,7 +40,7 @@ function removeFromCart(productId) {
 };
 
 function updDeliveryOption(productId, deliveryOption) {
-  const foundItem = cart.find((cartItem) => cartItem.productId === productId);
+  const foundItem = getCartItem(productId);
   foundItem.deliveryOptionId = deliveryOption;
   saveToStorage();
 }

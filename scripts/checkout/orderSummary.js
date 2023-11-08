@@ -1,18 +1,17 @@
 import { cart, removeFromCart, updCartQuantity, saveToStorage, updDeliveryOption } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import deliveryOptions from "../deliveryOprions.js";
+import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOprions.js";
+import rednderPaymentSummary from "./paymentSummary.js";
 
 console.log(cart);
 
 function renderCartList() {
   let cartHTML = '';
   cart.forEach((cartItem) => {
-    const productId = cartItem.productId;
-    const foundItem = products.find((item) => item.id === productId);
-    const deliveryOptionId = cartItem.deliveryOptionId;
-    const deliveryOption = deliveryOptions.find((option) => deliveryOptionId === option.id);
+    const foundItem = getProduct(cartItem);
+    const deliveryOption = getDeliveryOption(cartItem);
     const today = dayjs();
     const deliveryDate = today.add(
       deliveryOption.deliveryDays,
@@ -124,6 +123,7 @@ function renderCartList() {
           console.log(cart);
           saveToStorage();
           renderCartList();
+          rednderPaymentSummary();
           updCartQuantity();
         }
         cartContainer.classList.remove('is-editing-quantity');
@@ -135,6 +135,7 @@ function renderCartList() {
       link.addEventListener('click', () => {
         removeFromCart(link.dataset.productId);
         updCartQuantity();
+        rednderPaymentSummary();
         document.querySelector(`.cart-item-container-${link.dataset.productId}`)
           .remove();
       })
@@ -146,10 +147,9 @@ function renderCartList() {
         const {productId, deliveryOptionId} = element.dataset;
         updDeliveryOption(productId, deliveryOptionId);
         renderCartList();
+        rednderPaymentSummary();
       })
     })
 };
-
-renderCartList();
 
 export default renderCartList;
